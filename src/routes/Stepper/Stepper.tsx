@@ -31,7 +31,6 @@ const Stepper = () => {
 
   return (
     <section id="stepper">
-      <Steps current={1} direction="vertical" items={visibleSteps} />
       <div>{visibleSteps[0].content}</div>
       <div>
         {currentStep > 0 && (

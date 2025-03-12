@@ -1,7 +1,6 @@
 import {
   UsergroupAddOutlined,
   ClockCircleOutlined,
-  ScissorOutlined,
   EditOutlined,
   CheckCircleOutlined,
 } from '@ant-design/icons';
@@ -10,9 +9,9 @@ import { Services } from './Steps';
 
 type TSteps = {
   id: number;
-  title: ReactNode;
+  title?: ReactNode;
   content: ReactElement;
-  icon: ReactElement;
+  icon?: ReactElement;
 };
 
 /**
@@ -21,9 +20,7 @@ type TSteps = {
 const STEPS: Array<TSteps> = [
   {
     id: 0,
-    title: 'Choose your Service',
     content: <Services />,
-    icon: <ScissorOutlined />,
   },
   {
     id: 1,

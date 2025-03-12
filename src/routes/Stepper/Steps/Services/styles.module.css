@@ -1,0 +1,73 @@
+.servicesContainer {
+  background-color: #1a1a1a;
+
+  :global(.ant-collapse-content-box) {
+    background-color: #1a1a1a;
+  }
+}
+
+.text {
+  color: white;
+  margin: 0.2rem 0;
+}
+
+.serviceTitle {
+  text-transform: uppercase;
+  text-align: start;
+  font-size: large;
+  font-weight: 700;
+}
+
+.serviceSecondaryTitle {
+  text-transform: uppercase;
+  text-align: start;
+  font-size: medium;
+  color: #777;
+}
+
+.serviceImage {
+  margin-right: 1rem;
+}
+
+.labelIcon {
+  color: white;
+}
+
+.icon {
+  margin: auto 0;
+  color: white !important;
+}
+
+.divider {
+  background-color: #666;
+  margin: 0;
+}
+
+.serviceContentWrapper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cosmeticArrow {
+  color: white;
+  margin-left: auto;
+}
+
+.serviceCard {
+  background: transparent;
+
+  :hover {
+    background-color: #212121;
+  }
+
+  :global(.ant-card-body) {
+    padding: 0.5rem;
+  }
+
+  .serviceData {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: baseline;
+  }
+}
