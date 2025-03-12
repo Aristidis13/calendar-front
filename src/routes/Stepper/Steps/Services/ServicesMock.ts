@@ -4,21 +4,22 @@ import { TServices } from './types/Services';
  * The data for  the optional step of Services
  */
 const services: TServices = {
-  title: 'Services',
+  title: 'Choose your Service',
   services: [
     {
       id: 0,
-      label: 'Ξυρισμα στο δεξί Παπαρι',
+      label: 'Παιδικό (ηλικίες κάτω των 14)',
       price: 10,
-      img: '#',
+      img: '/kids.jpg',
     },
     {
       id: 1,
-      label: 'Κούρεμα και ξύρισμα',
+      label: 'Κούρεμα και Περιποίηση Γενειάδας',
       price: 15,
+      img: '/beard.webp',
     },
-    { id: 2, label: 'Κούρεμα', price: 12 },
-    { id: 3, label: 'Ξυρισμα', price: 2 },
+    { id: 2, label: 'Κούρεμα', price: 12, img: '/haircut.png' },
+    { id: 3, label: 'Ξυρισμα', price: 2, img: '/shave.jpg' },
   ],
 };
 
