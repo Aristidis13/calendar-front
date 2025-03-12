@@ -1,8 +1,9 @@
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 import { Card, Divider, Typography } from 'antd';
 import { TService } from './types/Services';
 import CLASSES from './styles.module.css';
 import { RightOutlined } from '@ant-design/icons';
+import { StepsContext } from '../../../context';
 
 type TServiceProps = {
   service: TService;
@@ -17,6 +18,7 @@ type TServiceProps = {
  * @returns {ReactNode} - The Service
  */
 const Service = ({ service, isFirstElement }: TServiceProps): ReactNode => {
+  const { saveService } = useContext(StepsContext) as any;
   return (
     <>
       {!isFirstElement && <Divider className={CLASSES.divider} />}
@@ -25,7 +27,10 @@ const Service = ({ service, isFirstElement }: TServiceProps): ReactNode => {
         variant="borderless"
         hoverable
         onClick={() => {
-          console.log(service);
+          saveService(service);
+        }}
+        onTouchStart={() => {
+          saveService(service);
         }}
       >
         <section className={CLASSES.serviceContentWrapper}>
