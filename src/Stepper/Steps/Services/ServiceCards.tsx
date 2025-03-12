@@ -7,7 +7,7 @@ interface IServices {
 
 const ServiceCards = ({ services }: IServices) => {
   return services.map((service, index) => (
-    <Service isFirstElement={index === 0} service={service} />
+    <Service key={'serv-' + index} isFirstElement={index === 0} service={service} />
   ));
 };
 

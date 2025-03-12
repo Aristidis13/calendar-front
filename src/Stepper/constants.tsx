@@ -3,9 +3,12 @@ import {
   ClockCircleOutlined,
   EditOutlined,
   CheckCircleOutlined,
+  ScissorOutlined,
 } from '@ant-design/icons';
 import { ReactElement, ReactNode } from 'react';
 import { Services } from './Steps';
+import { Title } from '../common';
+import Barbers from './Steps/Barbers/Barbers';
 
 type TSteps = {
   id: number;
@@ -20,13 +23,20 @@ type TSteps = {
 const STEPS: Array<TSteps> = [
   {
     id: 0,
-    content: <Services />,
+    content: (
+      <Services
+        label={
+          <Title
+            title={<><ScissorOutlined className="labelIcon" /> SERVICES</>} //prettier-ignore
+            secondaryTitle="CHOOSE YOUR SERVICE"
+          />
+        }
+      />
+    ),
   },
   {
     id: 1,
-    title: 'Choose your Barber',
-    content: <div>Select Barber</div>,
-    icon: <UsergroupAddOutlined />,
+    content: <Barbers />,
   },
   {
     id: 2,

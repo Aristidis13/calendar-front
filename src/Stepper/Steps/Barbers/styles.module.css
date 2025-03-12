@@ -1,0 +1,47 @@
+.barberCard {
+  background-color: #1a1a1a;
+}
+
+.backBtn {
+  margin-bottom: 0.5rem;
+  align-self: start;
+}
+.backBtn:hover {
+  border: none;
+}
+
+.avatarWrapper {
+  display: flex;
+  gap: 1.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.barberAvatarContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 2rem;
+}
+
+.name {
+  color: white;
+  margin-top: 1rem;
+  font-size: large;
+}
+
+.barberAvatars {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.barbersWrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}

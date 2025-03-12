@@ -2,13 +2,19 @@ import { Collapse } from 'antd';
 import { services } from './ServicesMock';
 import CLASSES from './styles.module.css';
 import ServiceCards from './ServiceCards';
-import { DownOutlined, ScissorOutlined } from '@ant-design/icons';
-import Title from './Title';
+import { DownOutlined } from '@ant-design/icons';
+import { ReactNode } from 'react';
+
+interface IServices {
+  label: ReactNode;
+}
 
 /**
  * The Collapse that contains a title and Services
+ * @param {object} props - The props of the Component
+ * @param {ReactNode} props.label - The title of the Collapsible
  */
-const Services = () => {
+const Services = ({ label }: IServices): ReactNode => {
   return (
     <Collapse
       className={CLASSES.servicesContainer}
@@ -21,16 +27,7 @@ const Services = () => {
       items={[
         {
           key: 0,
-          label: (
-            <Title
-              title={
-                <>
-                  <ScissorOutlined className={CLASSES.labelIcon} /> SERVICES
-                </>
-              }
-              secondaryTitle={services.title}
-            />
-          ),
+          label,
           children: <ServiceCards services={services.services} />,
         },
       ]}
