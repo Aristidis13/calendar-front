@@ -2,6 +2,7 @@ import { createContext, ReactNode, useCallback, useState } from 'react';
 import { STEPS } from '../Stepper/constants';
 import { TService } from '../Stepper/Steps/Services/types/Services';
 import { TBarber } from '../Stepper/Steps/Barbers/BarberAvatars';
+import { TShop } from '../Stepper/Steps/Shops/types/Shops';
 
 interface IStepsContext {
   children: ReactNode;
@@ -65,6 +66,14 @@ export const StepsProvider = ({ children }: IStepsContext): ReactNode => {
     [next, setReservation]
   );
 
+  const selectShop = useCallback((shop: TShop) => {
+    setReservation((prev) => ({
+      ...prev,
+      shop,
+    }));
+    next();
+  }, []);
+
   return (
     <StepsContext.Provider
       value={{
@@ -73,6 +82,7 @@ export const StepsProvider = ({ children }: IStepsContext): ReactNode => {
         visibleSteps,
         setVisibleSteps,
         saveService,
+        selectShop,
         reservation,
         next,
         prev,

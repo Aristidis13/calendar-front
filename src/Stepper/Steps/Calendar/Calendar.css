@@ -1,0 +1,28 @@
+.calendarWrapper {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+}
+
+.calendar {
+  background-color: transparent;
+  color: white;
+}
+
+.ant-picker-body {
+  background-color: #1a1a1a;
+  color: #717171;
+}
+
+.ant-picker-calendar-date-value {
+  color: var(--stylish-grey);
+}
+
+.ant-picker-cell.ant-picker-cell-selected .ant-picker-calendar-date-value {
+  color: var(--primary-color);
+}
+
+.ant-picker-body thead tr th {
+  color: white !important;
+}

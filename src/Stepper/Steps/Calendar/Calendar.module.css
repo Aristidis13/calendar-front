@@ -1,0 +1,15 @@
+.disabledDate {
+  color: #777;
+  text-decoration: line-through;
+}
+
+.selectedDate {
+  color: white;
+  border: 1px solid white;
+}
+
+.calendarContainer {
+  max-width: 30%;
+  border: 1px solid var(--stylish-grey);
+  padding: 1rem;
+}

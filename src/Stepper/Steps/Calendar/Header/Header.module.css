@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.arrowsWrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.arrowWrapper {
+  margin: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+
+.title {
+  color: antiquewhite !important;
+  text-align: start !important;
+  font-weight: 600 !important;
+  font-size: large !important;
+  margin-top: 0;
+}

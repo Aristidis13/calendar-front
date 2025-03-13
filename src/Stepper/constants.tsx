@@ -1,14 +1,6 @@
-import {
-  UsergroupAddOutlined,
-  ClockCircleOutlined,
-  EditOutlined,
-  CheckCircleOutlined,
-  ScissorOutlined,
-} from '@ant-design/icons';
+import { ClockCircleOutlined, EditOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { ReactElement, ReactNode } from 'react';
-import { Services } from './Steps';
-import { Title } from '../common';
-import Barbers from './Steps/Barbers/Barbers';
+import { Barbers, Calendar, Services, Shops } from './Steps';
 
 type TSteps = {
   id: number;
@@ -23,35 +15,30 @@ type TSteps = {
 const STEPS: Array<TSteps> = [
   {
     id: 0,
-    content: (
-      <Services
-        label={
-          <Title
-            title={<><ScissorOutlined className="labelIcon" /> SERVICES</>} //prettier-ignore
-            secondaryTitle="CHOOSE YOUR SERVICE"
-          />
-        }
-      />
-    ),
+    content: <Services />,
   },
   {
     id: 1,
-    content: <Barbers />,
+    content: <Shops />,
   },
   {
     id: 2,
-    title: 'Choose your Hour',
-    content: <div>Select Hour</div>,
-    icon: <ClockCircleOutlined />,
+    content: <Barbers />,
   },
   {
     id: 3,
+    title: 'Choose your Hour',
+    content: <Calendar />,
+    icon: <ClockCircleOutlined />,
+  },
+  {
+    id: 4,
     title: 'Tell us About you',
     content: <>Provide contact details</>,
     icon: <EditOutlined />,
   },
   {
-    id: 4,
+    id: 5,
     title: 'Appointment Scheduled',
     content: <>Congratulations</>,
     icon: <CheckCircleOutlined />,

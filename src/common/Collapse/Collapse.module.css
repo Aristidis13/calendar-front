@@ -1,0 +1,8 @@
+.container {
+  background-color: #1a1a1a;
+  width: 100%;
+
+  :global(.ant-collapse-content-box) {
+    background-color: #1a1a1a;
+  }
+}

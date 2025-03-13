@@ -11,6 +11,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --primary-color: #1a1a1a;
+  --stylish-grey: #898989;
+  --grey-hover: #333;
 }
 
 #root {
@@ -32,6 +35,28 @@ a:hover {
 
 .text {
   color: white;
+}
+
+.icon {
+  margin: auto 0;
+  color: white !important;
+}
+
+.cardWrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 2rem;
+}
+
+.avatarWrapper {
+  display: flex;
+  gap: 1.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
 }
 
 body {

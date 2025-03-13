@@ -1,0 +1,7 @@
+.backBtn {
+  margin-bottom: 0.5rem;
+  align-self: start;
+}
+.backBtn:hover {
+  border: none;
+}
