@@ -1,0 +1,33 @@
+.cardwrapper {
+  display: flex;
+  gap: 1.5rem;
+  background-color: #212121;
+  justify-content: center;
+  flex: 30%;
+}
+
+.shopImage {
+  width: 100%;
+  object-fit: contain;
+  aspect-ratio: 2/1;
+}
+
+.phone {
+  margin-top: 0.3rem;
+}
+
+.card {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 2rem;
+  max-width: 30%;
+  width: 30%;
+}
+
+.noPadding {
+  padding: 0;
+}

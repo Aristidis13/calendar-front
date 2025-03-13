@@ -7,15 +7,15 @@ import { StepsContext } from '../context';
 const Stepper = () => {
   const { visibleSteps, currentStep, prev, next } = useContext(StepsContext) as any;
   return (
-    <section id="stepper">
-      <div>{visibleSteps[0].content}</div>
+    <section id={CLASSES.stepper}>
+      {visibleSteps[0].content}
       <div>
-        {currentStep > 0 && (
+        {currentStep > 3 && (
           <Button className={CLASSES.button} onClick={() => prev()}>
             Previous
           </Button>
         )}
-        {currentStep > 1 && currentStep < STEPS.length - 1 && (
+        {currentStep > 3 && currentStep < STEPS.length - 1 && (
           <Button type="primary" className={CLASSES.button} onClick={() => next()}>
             Next
           </Button>

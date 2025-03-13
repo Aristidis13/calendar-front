@@ -17,8 +17,3 @@ export type TServices = {
   title: string;
   services: TService[];
 };
-
-export type TItems = {
-  key: string | number;
-  children: ReactNode;
-}[];

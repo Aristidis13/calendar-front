@@ -2,14 +2,6 @@
   background-color: #1a1a1a;
 }
 
-.backBtn {
-  margin-bottom: 0.5rem;
-  align-self: start;
-}
-.backBtn:hover {
-  border: none;
-}
-
 .avatarWrapper {
   display: flex;
   gap: 1.5rem;

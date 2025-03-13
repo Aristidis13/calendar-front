@@ -16,7 +16,7 @@ interface ITitleProps {
  * @returns {ReactNode} - the Title Component
  */
 const Title = ({ secondaryTitle, title }: ITitleProps): ReactNode => {
-  return (
+  return title ? (
     <div className={CLASSES.titleContainer}>
       <Typography className={`${CLASSES.text} ${CLASSES.serviceTitle}`}>{title}</Typography>
       {secondaryTitle && (
@@ -25,7 +25,7 @@ const Title = ({ secondaryTitle, title }: ITitleProps): ReactNode => {
         </Typography>
       )}
     </div>
-  );
+  ) : null;
 };
 
 export default Title;
