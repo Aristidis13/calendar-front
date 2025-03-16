@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useCallback, useState } from 'react';
 import { STEPS } from '../constants';
 import { TService } from '../Stepper/Steps/Services/types/Services';
+import { TFormData } from '../Stepper/Steps/Contact/types/Contact';
 import { TBarber } from '../Stepper/Steps/Barbers/BarberAvatars';
 import { TShop } from '../Stepper/Steps/Shops/types/Shops';
 import { Dayjs } from 'dayjs';
@@ -88,6 +89,14 @@ export const StepsProvider = ({ children }: IStepsContext): ReactNode => {
     next(STEPS.CONTACT_INFO);
   };
 
+  /**
+   * Sends the formData for OTP Validation
+   * @param {object} formData - Sends the formData to the Backend
+   */
+  const sendDetails = useCallback((formData: TFormData) => {
+    updateReservation(formData, 'contactInfo');
+  }, []);
+
   return (
     <StepsContext.Provider
       value={{
@@ -101,6 +110,7 @@ export const StepsProvider = ({ children }: IStepsContext): ReactNode => {
         selectBarber,
         selectDate,
         selectHour,
+        sendDetails,
       }}
     >
       {children}
