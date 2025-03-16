@@ -1,9 +1,12 @@
-import { Button, Form, Input, Typography } from 'antd';
+import { Button, Form, Input } from 'antd';
 import CLASSES from './Contact.module.css';
-import { BackButton, Card } from '../../../common';
-import { ErrorMsg } from '../../../common/ErrorMsg';
+import { BackButton, Card, ErrorMsg, FormLabel } from '../../../common';
+import { useContext, useState } from 'react';
+import { StepsContext } from '../../../context';
 
 const Contact = () => {
+  const { sendDetails } = useContext(StepsContext) as any;
+  const [otpAppears, setOtpAppears] = useState(false);
   const [form] = Form.useForm();
 
   return (
@@ -13,51 +16,72 @@ const Contact = () => {
         <Form
           form={form}
           onFinish={(values) => {
-            console.log(values);
+            sendDetails(values);
+            setOtpAppears(() => true);
           }}
           layout="vertical"
         >
           <Form.Item
             name="name"
-            label={<Typography className={CLASSES.label}>Full name</Typography>}
-            rules={[{ required: true, message: <ErrorMsg message="Please provide your name" /> }]}
+            label={<FormLabel message="Full Name" />}
+            rules={[
+              { required: true, message: <ErrorMsg message="Please provide your real name" /> },
+              {
+                pattern: /^[A-Z Α-ΩΆΌΏΊΉΈΎ]+$/i,
+                message: <ErrorMsg message="Please provide your real name" />,
+              },
+            ]}
           >
             <Input className={CLASSES.input} variant="outlined" />
           </Form.Item>
           <Form.Item
             required
             name="phone"
-            label={<Typography className={CLASSES.label}>Phone</Typography>}
-            rules={[{ required: true, message: <ErrorMsg message="Please provide your phone" /> }]}
+            label={<FormLabel message="Phone" />}
+            rules={[
+              { required: true, message: <ErrorMsg message="Please provide your phone" /> },
+              {
+                pattern: /^[0-9]{10}$/,
+                message: <ErrorMsg message="Please exactly 10 numbers" />,
+              },
+            ]}
           >
             <Input className={CLASSES.input} prefix="+30" />
           </Form.Item>
           <Form.Item
             required
             name="email"
-            label={<Typography className={CLASSES.label}>E-mail</Typography>}
+            label={<FormLabel message="E-mail" />}
             rules={[
               {
                 required: true,
-                message: (
-                  <ErrorMsg message="Please provide your email to know where to send your booking details" />
-                ),
+                message: <ErrorMsg message="Please provide your email" />,
+              },
+              {
+                type: 'email',
+                message: <ErrorMsg message="Please provide a valid email" />,
               },
             ]}
           >
             <Input className={CLASSES.input} />
           </Form.Item>
-          <Form.Item
-            name="comment"
-            label={<Typography className={CLASSES.label}>Comment</Typography>}
-          >
+          <Form.Item name="comment" label={<FormLabel message="Comment" />}>
             <Input.TextArea className={CLASSES.input} />
           </Form.Item>
-          <Form.Item className={CLASSES.btnContainer}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
+          {otpAppears && (
+            <>
+              <Form.Item>
+                <Input.OTP title="Check your phone for a real " />
+              </Form.Item>
+            </>
+          )}
+          {otpAppears === false && (
+            <Form.Item className={CLASSES.btnContainer}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          )}
         </Form>
       </Card>
     </>

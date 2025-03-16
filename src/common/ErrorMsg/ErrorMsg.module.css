@@ -1,2 +1,6 @@
 .message {
+  text-align: initial;
+  margin: 2px;
+  margin-bottom: 0.5rem;
+  font-style: italic;
 }
