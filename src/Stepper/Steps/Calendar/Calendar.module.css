@@ -1,3 +1,16 @@
+.calendarWrapper {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+}
+
 .disabledDate {
   color: #777;
   text-decoration: line-through;
@@ -9,7 +22,50 @@
 }
 
 .calendarContainer {
-  max-width: 30%;
+  width: 40%;
   border: 1px solid var(--stylish-grey);
   padding: 1rem;
+  min-width: 10rem;
+}
+
+.hoursContainer {
+  width: 40%;
+  margin: 1rem auto;
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 18rem;
+}
+
+.dateTitle {
+  color: white;
+  font-weight: 700;
+  font-size: large;
+  margin-bottom: 1rem;
+}
+
+.slotsContainer {
+  display: flex;
+  flex-flow: row wrap;
+  min-width: auto;
+  gap: 1rem;
+  justify-content: space-evenly;
+}
+
+.slot {
+  min-width: 2rem;
+  border: 1px solid var(--stylish-grey);
+  color: antiquewhite;
+  width: 35%;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .calendarContainer {
+    width: 100%;
+  }
+
+  .hoursContainer {
+    width: 100%;
+  }
 }
