@@ -1,31 +1,19 @@
-import { Button } from 'antd';
-import { STEPS } from './constants';
 import CLASSES from './Stepper.module.css';
 import { useContext } from 'react';
 import { StepsContext } from '../context';
+import { Barbers, Calendar, Services, Shops, Contact } from './Steps';
+import { STEPS } from '../constants';
 
 const Stepper = () => {
-  const { visibleSteps, currentStep, prev, next } = useContext(StepsContext) as any;
+  const { currentStep } = useContext(StepsContext) as any;
+
   return (
     <section id={CLASSES.stepper}>
-      {visibleSteps[0].content}
-      <div>
-        {currentStep > 3 && (
-          <Button className={CLASSES.button} onClick={() => prev()}>
-            Previous
-          </Button>
-        )}
-        {currentStep > 3 && currentStep < STEPS.length - 1 && (
-          <Button type="primary" className={CLASSES.button} onClick={() => next()}>
-            Next
-          </Button>
-        )}
-        {currentStep === STEPS.length - 1 && (
-          <Button type="primary" className={CLASSES.button}>
-            Done
-          </Button>
-        )}
-      </div>
+      {currentStep === STEPS.SERVICES && <Services />}
+      {currentStep === STEPS.SHOP && <Shops />}
+      {currentStep === STEPS.BARBER && <Barbers />}
+      {currentStep === STEPS.CALENDAR && <Calendar />}
+      {currentStep === STEPS.CONTACT_INFO && <Contact />}
     </section>
   );
 };

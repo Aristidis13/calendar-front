@@ -1,8 +1,9 @@
 import { createContext, ReactNode, useCallback, useState } from 'react';
-import { STEPS } from '../Stepper/constants';
+import { STEPS } from '../constants';
 import { TService } from '../Stepper/Steps/Services/types/Services';
 import { TBarber } from '../Stepper/Steps/Barbers/BarberAvatars';
 import { TShop } from '../Stepper/Steps/Shops/types/Shops';
+import { Dayjs } from 'dayjs';
 
 interface IStepsContext {
   children: ReactNode;
@@ -21,72 +22,85 @@ export const StepsContext = createContext({});
  * @returns {ReactNode} The rendered Component
  */
 export const StepsProvider = ({ children }: IStepsContext): ReactNode => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [visibleSteps, setVisibleSteps] = useState(STEPS.filter((step) => step.id === currentStep));
+  const [currentStep, setCurrentStep] = useState(STEPS.SERVICES);
   const [reservation, setReservation] = useState({});
 
-  const next = useCallback(() => {
-    setCurrentStep((prev) => {
-      const newCurrentStep = prev + 1;
-      setVisibleSteps(() => {
-        return STEPS.filter((step) => step.id === newCurrentStep);
-      });
+  const updateReservation = useCallback(
+    (term: any, name: string) => {
+      setReservation((prev) => ({
+        ...prev,
+        [name]: term,
+      }));
+    },
+    [setReservation]
+  );
 
-      return newCurrentStep;
-    });
-  }, []);
-
-  const saveService = useCallback((service: TService) => {
-    setReservation((prev) => ({
-      ...prev,
-      service,
-    }));
-    next();
-  }, []);
+  const next = useCallback(
+    (nextStep: string) => {
+      setCurrentStep(() => nextStep);
+    },
+    [setCurrentStep]
+  );
 
   const prev = useCallback(() => {
-    setCurrentStep((prev) => {
-      const newCurrentStep = prev - 1;
-      setVisibleSteps(() => {
-        return STEPS.filter((step) => step.id === newCurrentStep);
-      });
+    if (currentStep === STEPS.SHOP) {
+      setCurrentStep(() => STEPS.SERVICES);
+    } else if (currentStep === STEPS.BARBER) {
+      setCurrentStep(() => STEPS.SHOP);
+    } else if (currentStep === STEPS.CALENDAR) {
+      setCurrentStep(() => STEPS.BARBER);
+    } else if (currentStep === STEPS.CONTACT_INFO) {
+      setCurrentStep(() => STEPS.CALENDAR);
+    }
+  }, [currentStep, setCurrentStep]);
 
-      return newCurrentStep;
-    });
-  }, []);
+  const saveService = useCallback(
+    (service: TService) => {
+      updateReservation(service, 'service');
+      next(STEPS.SHOP);
+    },
+    [updateReservation]
+  );
+
+  const selectShop = useCallback(
+    (shop: TShop) => {
+      updateReservation(shop, 'shop');
+      next(STEPS.BARBER);
+    },
+    [updateReservation]
+  );
 
   const selectBarber = useCallback(
     (barber: TBarber) => {
-      setReservation((prev) => ({
-        ...prev,
-        barber,
-      }));
-      next();
+      updateReservation(barber, 'barber');
+      next(STEPS.CALENDAR);
     },
-    [next, setReservation]
+    [next, updateReservation]
   );
 
-  const selectShop = useCallback((shop: TShop) => {
-    setReservation((prev) => ({
-      ...prev,
-      shop,
-    }));
-    next();
-  }, []);
+  const selectDate = (date: Dayjs) => {
+    const formattedDate = date.format('DD-MM-YYYY');
+    updateReservation(formattedDate, 'date');
+  };
+
+  const selectHour = (hour: object) => {
+    updateReservation(hour, 'hour');
+    next(STEPS.CONTACT_INFO);
+  };
 
   return (
     <StepsContext.Provider
       value={{
         currentStep,
         setCurrentStep,
-        visibleSteps,
-        setVisibleSteps,
         saveService,
         selectShop,
         reservation,
         next,
         prev,
         selectBarber,
+        selectDate,
+        selectHour,
       }}
     >
       {children}

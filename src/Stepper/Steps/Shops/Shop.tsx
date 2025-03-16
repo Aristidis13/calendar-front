@@ -14,7 +14,12 @@ import { IShopProps } from './types/Shops';
 const Shop = ({ shop }: IShopProps): ReactNode => {
   const { selectShop } = useContext(StepsContext) as any;
   return (
-    <Card className={CLASSES.noPadding + ' ' + CLASSES.card} onClick={selectShop}>
+    <Card
+      className={CLASSES.noPadding + ' ' + CLASSES.card}
+      onClick={() => {
+        selectShop(shop);
+      }}
+    >
       <div>
         <img className={CLASSES.shopImage} src={shop.img} alt={shop.name} />
       </div>

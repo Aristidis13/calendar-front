@@ -1,0 +1,25 @@
+.contactWrapper {
+}
+
+.cardContainer {
+  width: 100%;
+}
+
+.asterisk {
+  color: red;
+}
+
+.label {
+  color: antiquewhite;
+  text-align: start;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: start;
+}
+
+.input {
+  background-color: transparent !important;
+  color: antiquewhite;
+}
