@@ -41,3 +41,15 @@ The system also includes views for business owners to configure their booking en
     Control availability, schedules, and other operational settings
 
 This setup ensures each business can customize the experience to match their unique workflow.
+
+---
+
+🗃️ Technologies & Tools
+
+    React for the Views creation
+
+    TypeScript for handling the workflow
+
+    Antd@5.xx.xx for Component Library
+
+    dayjs for handling date related data
