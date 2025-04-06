@@ -1,54 +1,55 @@
-# React + TypeScript + Vite
+💈 Barber Shop Booking System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a booking system tailored for barber shops, allowing users to easily reserve a spot for a haircut through a business's specific app.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🧾 Booking Flow (User Side)
 
-## Expanding the ESLint configuration
+    Select Service – Choose from the services offered (e.g., haircut, beard trim, etc.)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+    Choose Shop – If the business operates multiple locations, select the preferred shop
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+    Pick Barber – When available, users can select a specific barber
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    Set Date & Time – Pick a convenient time slot for the appointment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    Enter Personal Details – Provide name, email, and phone number
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+🔐 Phone Verification via Viber
+
+After submitting their information, users receive an OTP via Viber to verify their phone number:
+
+    ✅ If the OTP is confirmed, the booking is validated
+
+    ⚠️ If verification fails, the booking still stands with status unvalidated, and the user is notified
+
+---
+
+🧑‍💼 Business Owner Setup
+
+The system also includes views for business owners to configure their booking environment. Upon signing in, a business owner can:
+
+    Access their shop's dashboard
+
+    Answer a questionnaire to tailor the app's behavior
+
+    Set up and manage services, locations (shops), and barbers
+
+    Control availability, schedules, and other operational settings
+
+This setup ensures each business can customize the experience to match their unique workflow.
+
+---
+
+🗃️ Technologies & Tools
+
+    React for the Views creation
+
+    TypeScript for handling the workflow
+
+    Antd@5.xx.xx for Component Library
+
+    dayjs for handling date related data
