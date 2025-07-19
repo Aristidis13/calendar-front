@@ -6,6 +6,6 @@ type TItems = {
   children: ReactNode;
 }[];
 
-interface ICollapseProps {
+export interface ICollapseProps {
   items: TItems;
 }

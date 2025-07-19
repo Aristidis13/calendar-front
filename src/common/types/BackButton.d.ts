@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
 
-interface BackButtonProps {
+export interface BackButtonProps {
   name: ReactNode;
 }

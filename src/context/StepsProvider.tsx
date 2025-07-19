@@ -1,10 +1,11 @@
-import { createContext, ReactNode, useCallback, useState } from 'react';
-import { STEPS } from '../constants';
-import { TService } from '../Stepper/Steps/Services/types/Services';
-import { TFormData } from '../Stepper/Steps/Contact/types/Contact';
-import { TBarber } from '../Stepper/Steps/Barbers/BarberAvatars';
-import { TShop } from '../Stepper/Steps/Shops/types/Shops';
+import { ReactNode, createContext, useCallback, useState } from 'react';
+
 import { Dayjs } from 'dayjs';
+import { STEPS } from '../constants';
+import { TBarber } from '../Stepper/Steps/Barbers/BarberAvatars';
+import { TFormData } from '../Stepper/Steps/Contact/types/Contact';
+import { TService } from '../Stepper/Steps/Services/types/Services';
+import { TShop } from '../Stepper/Steps/Shops/types/Shops';
 
 interface IStepsContext {
   children: ReactNode;
@@ -44,15 +45,10 @@ export const StepsProvider = ({ children }: IStepsContext): ReactNode => {
   );
 
   const prev = useCallback(() => {
-    if (currentStep === STEPS.SHOP) {
-      setCurrentStep(() => STEPS.SERVICES);
-    } else if (currentStep === STEPS.BARBER) {
-      setCurrentStep(() => STEPS.SHOP);
-    } else if (currentStep === STEPS.CALENDAR) {
-      setCurrentStep(() => STEPS.BARBER);
-    } else if (currentStep === STEPS.CONTACT_INFO) {
-      setCurrentStep(() => STEPS.CALENDAR);
-    }
+    if (currentStep === STEPS.SHOP) setCurrentStep(() => STEPS.SERVICES);
+    else if (currentStep === STEPS.BARBER) setCurrentStep(() => STEPS.SHOP);
+    else if (currentStep === STEPS.CALENDAR) setCurrentStep(() => STEPS.BARBER);
+    else if (currentStep === STEPS.CONTACT_INFO) setCurrentStep(() => STEPS.CALENDAR);
   }, [currentStep, setCurrentStep]);
 
   const saveService = useCallback(

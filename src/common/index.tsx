@@ -4,3 +4,4 @@ export { Card } from './Card';
 export { BackButton } from './BackButton';
 export { ErrorMsg } from './ErrorMsg';
 export { FormLabel } from './Form';
+export { Image } from './Image';

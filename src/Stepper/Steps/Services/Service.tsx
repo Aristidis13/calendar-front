@@ -1,9 +1,11 @@
-import { ReactNode, useContext } from 'react';
 import { Card, Divider, Typography } from 'antd';
-import { TService } from './types/Services';
+import { ReactNode, useContext } from 'react';
+
 import CLASSES from './styles.module.css';
+import { Image } from '../../../common';
 import { RightOutlined } from '@ant-design/icons';
 import { StepsContext } from '../../../context';
+import { TService } from './types/Services';
 
 type TServiceProps = {
   service: TService;
@@ -34,9 +36,7 @@ const Service = ({ service, isFirstElement }: TServiceProps): ReactNode => {
         }}
       >
         <section className={CLASSES.serviceContentWrapper}>
-          {service.img && (
-            <img className={CLASSES.serviceImage} width={50} src={service.img} alt="" />
-          )}
+          {service.img && <Image img={service.img} />}
           <div className={CLASSES.serviceData}>
             <Typography className={CLASSES.text}>{service.label}</Typography>
             <p className={CLASSES.text}>€ {service.price}</p>
