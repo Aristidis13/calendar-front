@@ -30,7 +30,7 @@ module.exports = {
     'no-prototype-builtins': 'off',
     'no-useless-escape': 'off',
     'react/display-name': 'off',
-    'react/prop-types': 'warn',
+    'react/prop-types': 'off',
     'react/jsx-key': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'off',

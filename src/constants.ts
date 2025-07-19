@@ -1,5 +1,3 @@
-const BASE_URL = 'http://localhost:3000/api/';
-
 /**
  * The Steps to make the process of booking
  */
@@ -12,14 +10,4 @@ const STEPS = {
   CONFIRMATION: 'CONFIRMATION',
 };
 
-/**
- * PROVIDES THE URLS FOR THE APIS TO CALL
- */
-const SERVICES = {
-  getShopData: {
-    url: BASE_URL + 'getShopData',
-    id: 'getShopData',
-  },
-};
-
-export { SERVICES, STEPS };
+export { STEPS };
