@@ -1,5 +1,4 @@
 import { Collapse } from '../../../common';
-import { services } from './ServicesMock';
 import ServiceCards from './ServiceCards';
 import { ScissorOutlined } from '@ant-design/icons';
 import { ReactNode } from 'react';
@@ -21,14 +20,14 @@ const Label = () => (
  * @param {object} props - The props of the Component
  * @param {ReactNode} props.label - The title of the Collapsible
  */
-const Services = (): ReactNode => {
+const Services = ({ services }): ReactNode => {
   return (
     <Collapse
       items={[
         {
           key: 0,
           label: <Label />,
-          children: <ServiceCards services={services.services} />,
+          children: <ServiceCards services={services} />,
         },
       ]}
     />
