@@ -1,9 +1,10 @@
-import { Typography, Card } from 'antd';
-import { PhoneOutlined } from '@ant-design/icons';
+import { Card, Typography } from 'antd';
 import { ReactNode, useContext } from 'react';
+
 import CLASSES from './styles.module.css';
-import { StepsContext } from '../../../context';
 import { IShopProps } from './types/Shops';
+import { PhoneOutlined } from '@ant-design/icons';
+import { StepsContext } from '../../../context';
 
 /**
  * Creates a selectable Shop Card

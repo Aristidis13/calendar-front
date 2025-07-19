@@ -1,6 +1,6 @@
-import { Typography } from 'antd';
 import CLASSES from './Title.module.css';
 import { ReactNode } from 'react';
+import { Typography } from 'antd';
 
 interface ITitleProps {
   secondaryTitle?: ReactNode;
@@ -16,16 +16,16 @@ interface ITitleProps {
  * @returns {ReactNode} - the Title Component
  */
 const Title = ({ secondaryTitle, title }: ITitleProps): ReactNode => {
-  return title ? (
-    <div className={CLASSES.titleContainer}>
-      <Typography className={`${CLASSES.text} ${CLASSES.serviceTitle}`}>{title}</Typography>
-      {secondaryTitle && (
-        <Typography className={`${CLASSES.text} ${CLASSES.serviceSecondaryTitle}`}>
-          {secondaryTitle}
-        </Typography>
-      )}
-    </div>
-  ) : null;
+  return title ?
+      <div className={CLASSES.titleContainer}>
+        <Typography className={`${CLASSES.text} ${CLASSES.serviceTitle}`}>{title}</Typography>
+        {secondaryTitle && (
+          <Typography className={`${CLASSES.text} ${CLASSES.serviceSecondaryTitle}`}>
+            {secondaryTitle}
+          </Typography>
+        )}
+      </div>
+    : null;
 };
 
 export default Title;
