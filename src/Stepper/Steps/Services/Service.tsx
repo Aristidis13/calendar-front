@@ -2,7 +2,6 @@ import { Card, Divider, Typography } from 'antd';
 import { ReactNode, useContext } from 'react';
 
 import CLASSES from './styles.module.css';
-import { Image } from '../../../common';
 import { RightOutlined } from '@ant-design/icons';
 import { StepsContext } from '../../../context';
 import { TService } from './types/Services';
@@ -36,7 +35,6 @@ const Service = ({ service, isFirstElement }: TServiceProps): ReactNode => {
         }}
       >
         <section className={CLASSES.serviceContentWrapper}>
-          {service.img && <Image img={service.img} />}
           <div className={CLASSES.serviceData}>
             <Typography className={CLASSES.text}>{service.label}</Typography>
             <p className={CLASSES.text}>€ {service.price}</p>

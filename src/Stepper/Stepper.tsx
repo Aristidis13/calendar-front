@@ -1,10 +1,10 @@
 import { Barbers, Calendar, Contact, Services, Shops } from './Steps';
-import { SERVICES, STEPS } from '../constants';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import CLASSES from './Stepper.module.css';
+import { SERVICES } from '../../constants';
+import { STEPS } from '../constants';
 import { StepsContext } from '../context';
-import { useContext } from 'react';
 
 const Stepper = () => {
   const { currentStep } = useContext(StepsContext) as any;
@@ -17,14 +17,14 @@ const Stepper = () => {
       method: 'GET',
     })
       .then((res) => {
-        if (res.status !== 200) return;
-        else return res.json();
+        if (res.status !== 200) return null;
+        return res.json();
       })
       .then((data) => {
-        setShopData(() => data);
+        if (data) setShopData(() => data);
       })
       .catch((err) => {
-        return 'Problem in getShopData';
+        return 'Problem in getShopData' + JSON.stringify(err);
       });
   }, [getShopData]);
 
