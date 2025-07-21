@@ -3,6 +3,7 @@ import { ReactNode, useContext } from 'react';
 
 import CLASSES from './styles.module.css';
 import { IShopProps } from './types/Shops';
+import { Image } from '../../../common';
 import { PhoneOutlined } from '@ant-design/icons';
 import { StepsContext } from '../../../context';
 
@@ -21,6 +22,7 @@ const Shop = ({ shop }: IShopProps): ReactNode => {
         selectShop(shop);
       }}
     >
+      <Image image={shop.img} />
       <div>
         <img className={CLASSES.shopImage} src={shop.img} alt={shop.name} />
       </div>

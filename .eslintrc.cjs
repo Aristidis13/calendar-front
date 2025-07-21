@@ -7,7 +7,7 @@ module.exports = {
     jest: true,
   },
   // Installed plugins that allow additional rules
-  plugins: ['import', 'react', 'react-hooks', 'react-refresh'],
+  plugins: ['import', 'react', 'react-hooks', 'react-refresh', '@typescript-eslint'],
   // Extention of the schema of rules from other sources
   extends: [
     'eslint:recommended',
