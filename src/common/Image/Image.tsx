@@ -16,6 +16,10 @@ type TImage = {
 const Image = ({ img }: TImage) => {
   const { getImage, getImageError } = useFetchApi(SERVICES.getImage, { imgId: img });
 
+  useEffect(() => {
+    if (getImageError) console.error(getImageError);
+  }, [getImageError]);
+
   return getImage ?
       <img className={CLASSES.serviceImage} width={50} src={getImage.url} alt="" />
     : null;
