@@ -1,15 +1,25 @@
 import { Avatar, Card, Typography } from 'antd';
-import { TBarber } from './BarberAvatars';
+import { useContext, useEffect } from 'react';
+
 import CLASSES from './styles.module.css';
-import { useContext } from 'react';
+import { SERVICES } from '../../../../constants';
 import { StepsContext } from '../../../context';
+import { TBarber } from './BarberAvatars';
+import { useFetchApi } from '../../../common-hooks';
 
 interface BarberAvatarProps {
   barber: TBarber;
 }
 
 const BarberAvatar = ({ barber }: BarberAvatarProps) => {
-  const { selectBarber } = useContext(StepsContext) as any;
+  const { selectBarber } = useContext(StepsContext) as unknown;
+
+  const { getImage, getImageError } = useFetchApi(SERVICES.getImage, { imgId: barber.img });
+
+  useEffect(() => {
+    if (getImageError) console.error(getImageError);
+  }, [getImageError]);
+
   return (
     <Card
       className={CLASSES.barberAvatarContainer}
@@ -17,7 +27,7 @@ const BarberAvatar = ({ barber }: BarberAvatarProps) => {
         selectBarber(barber);
       }}
     >
-      <Avatar className={CLASSES.avatarWrapper} src={barber.img} />
+      <Avatar className={CLASSES.avatarWrapper} src={getImage?.url} />
       <Typography className={CLASSES.name}>{barber.name}</Typography>
     </Card>
   );

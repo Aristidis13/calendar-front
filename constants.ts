@@ -19,7 +19,7 @@ const SERVICES = {
     type: SERVICE_TYPES.GET,
   },
   getImage: {
-    url: BASE_URL + '/img/{imgId}',
+    url: BASE_URL + 'img',
     id: 'getImage',
     type: SERVICE_TYPES.GET,
   },
