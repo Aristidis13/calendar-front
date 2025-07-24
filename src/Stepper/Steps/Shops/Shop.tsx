@@ -22,10 +22,7 @@ const Shop = ({ shop }: IShopProps): ReactNode => {
         selectShop(shop);
       }}
     >
-      <Image image={shop.img} />
-      <div>
-        <img className={CLASSES.shopImage} src={shop.img} alt={shop.name} />
-      </div>
+      <Image img={shop.img} />
       <Typography className="text">{shop.address}</Typography>
       {shop?.phone && (
         <Typography className={'text ' + CLASSES.phone}>

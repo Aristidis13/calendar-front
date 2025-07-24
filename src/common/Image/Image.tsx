@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import CLASSES from './Image.module.css';
 import { SERVICES } from '../../../constants';
+import { useFetchApi } from '../../common-hooks';
 
 type TImage = {
   img: string;
@@ -13,27 +14,10 @@ type TImage = {
  * @returns - The rendered Component
  */
 const Image = ({ img }: TImage) => {
-  const [image, setImage] = useState(null);
+  const { getImage, getImageError } = useFetchApi(SERVICES.getImage, { imgId: img });
 
-  useEffect(() => {
-    if (image) return;
-    fetch(SERVICES.getImage.url.replace('{imgId}', img), {
-      method: 'GET',
-    })
-      .then((res) => {
-        if (res.status !== 200) return null;
-        return res.json();
-      })
-      .then((data) => {
-        setImage(() => data);
-      })
-      .catch((err) => {
-        console.error('Error fetching image:', err);
-      });
-  }, [image]);
-
-  return image?.url ?
-      <img className={CLASSES.serviceImage} width={50} src={image.url} alt="" />
+  return getImage ?
+      <img className={CLASSES.serviceImage} width={50} src={getImage.url} alt="" />
     : null;
 };
 
