@@ -14,7 +14,7 @@ import { StepsContext } from '../../../context';
  * @returns {ReactNode} -  The Component
  */
 const Shop = ({ shop }: IShopProps): ReactNode => {
-  const { selectShop } = useContext(StepsContext) as any;
+  const { selectShop } = useContext(StepsContext) as unknown;
   return (
     <Card
       className={CLASSES.noPadding + ' ' + CLASSES.card}

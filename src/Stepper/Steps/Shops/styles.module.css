@@ -19,13 +19,14 @@
 .card {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: transparent;
   cursor: pointer;
   padding: 2rem;
   max-width: 30%;
   width: 30%;
+  height: 100%;
 }
 
 .noPadding {
