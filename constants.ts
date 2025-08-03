@@ -23,6 +23,16 @@ const SERVICES = {
     id: 'getImage',
     type: SERVICE_TYPES.GET,
   },
+  getMonth: {
+    url: BASE_URL + 'month',
+    id: 'getMonth',
+    type: SERVICE_TYPES.GET,
+  },
+  getDay: {
+    url: BASE_URL + 'day',
+    id: 'getDay',
+    type: SERVICE_TYPES.GET,
+  },
 };
 
 export { SERVICE_TYPES, SERVICES };

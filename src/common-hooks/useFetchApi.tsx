@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { calculateApiUrl } from './utils';
 
@@ -6,15 +6,14 @@ import { calculateApiUrl } from './utils';
  * Accepts a service object and parameters and performs a server call.
  * Returns a response with the data the server fetched, an error if exists or if the API is pending
  */
-const useFetchApi = (service, params = {}) => {
+const useFetchApi = (service, params = {}, deps = []) => {
   const { url, id } = service || {};
   const [data, setData] = useState<unknown>(null);
   const [pending, setPending] = useState<boolean>(false);
   const [error, setError] = useState<object>(null);
 
-  useEffect(() => {
-    if (pending || data || error) return;
-    fetch(calculateApiUrl(url, service.type, params))
+  const fetchData = useCallback((parameters) => {
+    fetch(calculateApiUrl(url, service.type, parameters || params))
       .then((res) => {
         return res.json();
       })
@@ -24,7 +23,12 @@ const useFetchApi = (service, params = {}) => {
       .catch((err) => {
         setError(err);
       });
-  }, []);
+  }, deps);
+
+  useEffect(() => {
+    if (pending || data || error) return;
+    fetchData();
+  }, deps);
 
   /**
    * Pending state is handled outside of fetch for Separation of Concerns
@@ -38,11 +42,12 @@ const useFetchApi = (service, params = {}) => {
 
   return useMemo(() => {
     return {
+      fetchData,
       [id]: data,
       [`${id}Pending`]: pending,
       [`${id}Error`]: error,
     };
-  }, [pending, data, error]);
+  }, [pending, data, error, fetchData]);
 };
 
 export default useFetchApi;

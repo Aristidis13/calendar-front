@@ -28,7 +28,7 @@ export const StepsProvider = ({ children }: IStepsContext): ReactNode => {
   const [reservation, setReservation] = useState({});
 
   const updateReservation = useCallback(
-    (term: any, name: string) => {
+    (term: unknown, name: string) => {
       setReservation((prev) => ({
         ...prev,
         [name]: term,
@@ -76,7 +76,7 @@ export const StepsProvider = ({ children }: IStepsContext): ReactNode => {
   );
 
   const selectDate = (date: Dayjs) => {
-    const formattedDate = date.format('DD-MM-YYYY');
+    const formattedDate = date.format('YYYY-MM-DD');
     updateReservation(formattedDate, 'date');
   };
 

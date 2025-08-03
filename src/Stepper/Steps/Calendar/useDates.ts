@@ -25,7 +25,7 @@ const useDates = () => {
     return isPastDate || isAfterAYearFromToday || noAvailableSlotsForTheDay;
   };
 
-  return { validRange, isDisabled, selectedDate, setSelectedDate };
+  return { today, validRange, isDisabled, selectedDate, setSelectedDate };
 };
 
 export default useDates;
