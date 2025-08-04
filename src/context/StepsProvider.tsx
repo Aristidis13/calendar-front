@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useCallback, useState } from 'react';
+import dayjs, { Dayjs } from 'dayjs';
 
-import { Dayjs } from 'dayjs';
 import { STEPS } from '../constants';
 import { TBarber } from '../Stepper/Steps/Barbers/BarberAvatars';
 import { TFormData } from '../Stepper/Steps/Contact/types/Contact';
@@ -25,7 +25,7 @@ export const StepsContext = createContext({});
  */
 export const StepsProvider = ({ children }: IStepsContext): ReactNode => {
   const [currentStep, setCurrentStep] = useState(STEPS.SERVICES);
-  const [reservation, setReservation] = useState({});
+  const [reservation, setReservation] = useState({ selectedDate: dayjs().format('YYYY-MM-DD') });
 
   const updateReservation = useCallback(
     (term: unknown, name: string) => {

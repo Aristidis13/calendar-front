@@ -1,9 +1,10 @@
-import { Button } from 'antd';
-import { LeftOutlined } from '@ant-design/icons';
 import { ReactNode, useContext } from 'react';
-import { StepsContext } from '../../context';
-import CLASSES from './BackButton.module.css';
+
 import { BackButtonProps } from '../types/BackButton';
+import { Button } from 'antd';
+import CLASSES from './BackButton.module.css';
+import { LeftOutlined } from '@ant-design/icons';
+import { StepsContext } from '../../context';
 
 /**
  * The Back Button  for each Step
@@ -12,7 +13,7 @@ import { BackButtonProps } from '../types/BackButton';
  * @returns {ReactNode} - The Button
  */
 const BackButton = ({ name }: BackButtonProps): ReactNode => {
-  const { prev } = useContext(StepsContext) as any;
+  const { prev } = useContext(StepsContext) as unknown;
   return (
     <Button type="text" variant="text" onClick={prev} ghost className={CLASSES.backBtn}>
       <span className="text">

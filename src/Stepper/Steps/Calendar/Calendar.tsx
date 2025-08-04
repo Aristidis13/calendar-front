@@ -12,6 +12,8 @@ import { StepsContext } from '../../../context';
 import useDates from './useDates';
 import useFetchApi from '../../../common-hooks/useFetchApi';
 
+const DATE_FORMAT = 'YYYY-MM-DD';
+
 /**
  * Creates the View for the Calendar Component
  * Calendar accepts the barber info and finds the program for this specific individual.
@@ -25,7 +27,7 @@ const Calendar = (): ReactNode => {
    */
   const apidayParams = useMemo(
     () => ({
-      selectedDate: reservation.date || today.format('YYYY-MM-DD'),
+      selectedDate: reservation.date || today.format(DATE_FORMAT),
       barberId: reservation.barber.id,
       shopId: reservation.shop.id,
     }),
@@ -64,7 +66,7 @@ const Calendar = (): ReactNode => {
               onSelect={(date) => {
                 setSelectedDate(() => date);
                 selectDate(date);
-                fetchData(apidayParams);
+                fetchData({ ...apidayParams, selectedDate: date.format(DATE_FORMAT) });
               }}
             />
           </div>
