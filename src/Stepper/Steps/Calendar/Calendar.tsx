@@ -1,7 +1,7 @@
 import './Calendar.css';
 
 import { BackButton, Card, Title } from '../../../common';
-import { ReactNode, useContext, useEffect, useMemo } from 'react';
+import { ReactNode, useCallback, useContext, useEffect, useMemo } from 'react';
 
 import { Calendar as AntCalendar } from 'antd';
 import CLASSES from './Calendar.module.css';
@@ -22,6 +22,16 @@ const DATE_FORMAT = 'YYYY-MM-DD';
 const Calendar = (): ReactNode => {
   const { selectDate, selectHour, reservation } = useContext(StepsContext) as unknown;
   const { today, validRange, isDisabled, selectedDate, setSelectedDate } = useDates();
+
+  /**
+   * The parameters to use to fetch which day is available for reservation and which isnt for a given month
+   */
+  const monthParams = {
+    selectedDate: reservation.date,
+    barberId: reservation.barber.id,
+    shopId: reservation.shop.id,
+  };
+
   /**
    * The parameters to use to fetch available slots to reserve for a specific day
    */
@@ -34,22 +44,38 @@ const Calendar = (): ReactNode => {
     [reservation]
   );
 
-  const dateFullCellRender = (date: Dayjs) => {
-    if (isDisabled(date)) return <div className={CLASSES.disabledDate}>{date.date()}</div>;
+  const {
+    getMonth,
+    getMonthError,
+    fetchData: fetchDataForMonth,
+  } = useFetchApi(SERVICES.getMonth, monthParams);
+
+  const {
+    getDay,
+    getDayError,
+    fetchData: fetchDataForDay,
+  } = useFetchApi(SERVICES.getDay, apidayParams, [reservation.date]);
+
+  const fetchMonth = useCallback((parameters) => {
+    fetchDataForMonth(parameters);
+  }, []);
+
+  const dateFullCellRender = (date: Dayjs, day) => {
+    const dayIsFullOfReservations = day?.is_full || false;
+    if (isDisabled(date) || dayIsFullOfReservations)
+      return <div className={CLASSES.disabledDate}>{date.date()}</div>;
     else if (date.isSame(selectedDate, 'day'))
       return <div className={CLASSES.selectedDate}>{date.date()}</div>;
 
     return <div style={{ color: '#ccc' }}>{date.date()}</div>;
   };
 
-  const { getDay, getDayError, fetchData } = useFetchApi(SERVICES.getDay, apidayParams, [
-    reservation.date,
-  ]);
-
   useEffect(() => {
     if (getDayError)
-      console.error('Error while fetcing available hours:' + JSON.stringify(getDayError));
-  }, []);
+      console.error('Error while fetcing available hours:' + JSON.stringify(getDayError)); //eslint-disable-line
+    else if (getMonthError)
+      console.error('Error while fetcing available days for month:' + JSON.stringify(getDayError)); //eslint-disable-line
+  }, [getDayError, getMonthError]);
 
   return (
     <div className={CLASSES.calendarWrapper}>
@@ -58,15 +84,22 @@ const Calendar = (): ReactNode => {
         <div className={CLASSES.cardContent}>
           <div className={CLASSES.calendarContainer}>
             <AntCalendar
-              headerRender={CalendarHeader}
+              headerRender={(props) => (
+                <CalendarHeader {...props} fetchData={fetchMonth} monthParams={monthParams} />
+              )}
               validRange={validRange}
               fullscreen={false}
               className="calendar"
-              fullCellRender={dateFullCellRender}
+              fullCellRender={(date) => {
+                const dayOfMonth = getMonth?.days.find(
+                  (day) => day.date === date.format(DATE_FORMAT)
+                );
+                return dateFullCellRender(date, dayOfMonth);
+              }}
               onSelect={(date) => {
                 setSelectedDate(() => date);
                 selectDate(date);
-                fetchData({ ...apidayParams, selectedDate: date.format(DATE_FORMAT) });
+                fetchDataForDay({ ...apidayParams, selectedDate: date.format(DATE_FORMAT) });
               }}
             />
           </div>
