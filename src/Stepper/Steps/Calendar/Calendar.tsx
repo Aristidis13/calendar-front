@@ -1,7 +1,7 @@
 import './Calendar.css';
 
 import { BackButton, Card, Title } from '../../../common';
-import { ReactNode, useContext, useEffect } from 'react';
+import { ReactNode, useContext, useEffect, useMemo } from 'react';
 
 import { Calendar as AntCalendar } from 'antd';
 import CLASSES from './Calendar.module.css';
@@ -20,6 +20,17 @@ import useFetchApi from '../../../common-hooks/useFetchApi';
 const Calendar = (): ReactNode => {
   const { selectDate, selectHour, reservation } = useContext(StepsContext) as unknown;
   const { today, validRange, isDisabled, selectedDate, setSelectedDate } = useDates();
+  /**
+   * The parameters to use to fetch available slots to reserve for a specific day
+   */
+  const apidayParams = useMemo(
+    () => ({
+      selectedDate: reservation.date || today.format('YYYY-MM-DD'),
+      barberId: reservation.barber.id,
+      shopId: reservation.shop.id,
+    }),
+    [reservation]
+  );
 
   const dateFullCellRender = (date: Dayjs) => {
     if (isDisabled(date)) return <div className={CLASSES.disabledDate}>{date.date()}</div>;
@@ -29,13 +40,9 @@ const Calendar = (): ReactNode => {
     return <div style={{ color: '#ccc' }}>{date.date()}</div>;
   };
 
-  const { getDay, getDayError, fetchData } = useFetchApi(
-    SERVICES.getDay,
-    {
-      selectedDate: reservation.date || today.format('YYYY-MM-DD'),
-    },
-    [reservation.date]
-  );
+  const { getDay, getDayError, fetchData } = useFetchApi(SERVICES.getDay, apidayParams, [
+    reservation.date,
+  ]);
 
   useEffect(() => {
     if (getDayError)
@@ -57,14 +64,14 @@ const Calendar = (): ReactNode => {
               onSelect={(date) => {
                 setSelectedDate(() => date);
                 selectDate(date);
-                fetchData({ selectedDate: date.format('YYYY-MM-DD') });
+                fetchData(apidayParams);
               }}
             />
           </div>
           <div className={CLASSES.hoursContainer}>
             <div className={CLASSES.dateTitle}>{selectedDate.format('dddd DD MMMM')}</div>
             <div className={CLASSES.slotsContainer}>
-              {(getDay || []).map((slot) => (
+              {(getDay?.availableSlots || []).map((slot) => (
                 <div
                   className={CLASSES.slot}
                   key={slot}
