@@ -33,6 +33,12 @@ const SERVICES = {
     id: 'getDay',
     type: SERVICE_TYPES.GET,
   },
+  postReservation: {
+    url: BASE_URL + 'save',
+    id: 'postReservation',
+    type: SERVICE_TYPES.POST,
+    fetchWithButton: true,
+  },
 };
 
 export { SERVICE_TYPES, SERVICES };

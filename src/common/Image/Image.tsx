@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-
 import CLASSES from './Image.module.css';
 import { SERVICES } from '../../../constants';
+import { useEffect } from 'react';
 import { useFetchApi } from '../../common-hooks';
 
 type TImage = {

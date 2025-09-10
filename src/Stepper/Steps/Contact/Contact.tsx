@@ -1,13 +1,19 @@
-import { Button, Form, Input } from 'antd';
-import CLASSES from './Contact.module.css';
 import { BackButton, Card, ErrorMsg, FormLabel } from '../../../common';
-import { useContext, useState } from 'react';
+import { Button, Form, Input } from 'antd';
+
+import CLASSES from './Contact.module.css';
+import { SERVICES } from '../../../../constants';
 import { StepsContext } from '../../../context';
+import { useContext } from 'react';
+import { useFetchApi } from '../../../common-hooks';
 
 const Contact = () => {
-  const { sendDetails } = useContext(StepsContext) as any;
-  const [otpAppears, setOtpAppears] = useState(false);
+  const { sendDetails, reservation } = useContext(StepsContext) as unknown;
   const [form] = Form.useForm();
+
+  const { fetchData, postReservation, postReservationPending, postReservationError } = useFetchApi(
+    SERVICES.postReservation
+  );
 
   return (
     <>
@@ -17,7 +23,6 @@ const Contact = () => {
           form={form}
           onFinish={(values) => {
             sendDetails(values);
-            setOtpAppears(() => true);
           }}
           layout="vertical"
         >
@@ -68,20 +73,17 @@ const Contact = () => {
           <Form.Item name="comment" label={<FormLabel message="Comment" />}>
             <Input.TextArea className={CLASSES.input} />
           </Form.Item>
-          {otpAppears && (
-            <>
-              <Form.Item>
-                <Input.OTP title="Check your phone for a real " />
-              </Form.Item>
-            </>
-          )}
-          {otpAppears === false && (
-            <Form.Item className={CLASSES.btnContainer}>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Form.Item>
-          )}
+          <Form.Item label={null} className={CLASSES.btnContainer}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              onClick={() => {
+                fetchData(reservation);
+              }}
+            >
+              Submit
+            </Button>
+          </Form.Item>
         </Form>
       </Card>
     </>

@@ -1,19 +1,19 @@
+import { calculateApiUrl, calculateParams } from './utils';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-
-import { calculateApiUrl } from './utils';
 
 /**
  * Accepts a service object and parameters and performs a server call.
  * Returns a response with the data the server fetched, an error if exists or if the API is pending
  */
 const useFetchApi = (service, params = {}, deps = []) => {
-  const { url, id } = service || {};
+  const { url, id, type, fetchWithButton } = service || {};
   const [data, setData] = useState<unknown>(null);
   const [pending, setPending] = useState<boolean>(false);
   const [error, setError] = useState<object>(null);
 
   const fetchData = useCallback((parameters) => {
-    fetch(calculateApiUrl(url, service.type, parameters || params))
+    const fetchParams = parameters || params;
+    fetch(calculateApiUrl(url, type, fetchParams), calculateParams(type, fetchParams))
       .then((res) => {
         return res.json();
       })
@@ -26,7 +26,7 @@ const useFetchApi = (service, params = {}, deps = []) => {
   }, deps);
 
   useEffect(() => {
-    if (pending || data || error) return;
+    if (pending || data || error || fetchWithButton) return;
     fetchData();
   }, deps);
 

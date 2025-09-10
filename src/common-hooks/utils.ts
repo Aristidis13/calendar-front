@@ -17,4 +17,20 @@ const calculateApiUrl = (baseUrl, type, params) => {
   }
 };
 
-export { calculateApiUrl };
+/**
+ * Calculate what object will send to the fetch endPoint regarding the parameters
+ * @param {Object.values(SERVICE_TYPES)}method - The method of the api (POST, GET, PUT)
+ * @param {Object} body - The body
+ */
+const calculateParams = (method, body) => {
+  if (method === SERVICE_TYPES.POST) {
+    return {
+      method: SERVICE_TYPES.POST,
+      body: JSON.stringify(body),
+    };
+  }
+
+  return {};
+};
+
+export { calculateApiUrl, calculateParams };
