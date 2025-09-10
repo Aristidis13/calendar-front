@@ -1,10 +1,10 @@
 import { BackButton, Card, ErrorMsg, FormLabel } from '../../../common';
 import { Button, Form, Input } from 'antd';
+import { useContext, useEffect } from 'react';
 
 import CLASSES from './Contact.module.css';
 import { SERVICES } from '../../../../constants';
 import { StepsContext } from '../../../context';
-import { useContext } from 'react';
 import { useFetchApi } from '../../../common-hooks';
 
 const Contact = () => {
@@ -15,11 +15,17 @@ const Contact = () => {
     SERVICES.postReservation
   );
 
+  useEffect(() => {
+    if (postReservationError) console.error(postReservationError);
+    else if (postReservation) console.log(postReservation);
+  }, [postReservationError]);
+
   return (
     <>
       <BackButton name="SELECT A NEW DATE" />
       <Card className={CLASSES.cardContainer} title="Tell us about you">
         <Form
+          loading={postReservationPending}
           form={form}
           onFinish={(values) => {
             sendDetails(values);
