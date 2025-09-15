@@ -20,27 +20,11 @@ This is a booking system tailored for barber shops, allowing users to easily res
 
 🔐 Phone Verification via Viber
 
-After submitting their information, users receive an OTP via Viber to verify their phone number:
+After submitting their information, and save, users receive an email and (if Viber exists) a message in Viber:
 
     ✅ If the OTP is confirmed, the booking is validated
 
     ⚠️ If verification fails, the booking still stands with status unvalidated, and the user is notified
-
----
-
-🧑‍💼 Business Owner Setup
-
-The system also includes views for business owners to configure their booking environment. Upon signing in, a business owner can:
-
-    Access their shop's dashboard
-
-    Answer a questionnaire to tailor the app's behavior
-
-    Set up and manage services, locations (shops), and barbers
-
-    Control availability, schedules, and other operational settings
-
-This setup ensures each business can customize the experience to match their unique workflow.
 
 ---
 
