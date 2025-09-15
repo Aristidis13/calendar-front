@@ -20,8 +20,10 @@ This is a booking system tailored for barber shops, allowing users to easily res
 
 🔐 Reservation Status Update via Email/Viber
 
+    If user has Viber, he receives a Viber notification.
+    
     Users receive an email to know everything went well.
-    If user has Viber he receives a Viber notification.
+    
 
 ---
 
